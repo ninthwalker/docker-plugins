@@ -1,0 +1,81 @@
+<?xml version='1.0' standalone='yes'?>
+
+<!-- Modified from original source: Copyright 2015, Bergware International -->
+
+
+<!DOCTYPE PLUGIN [
+<!ENTITY name      "plexreport.scheduler">
+<!ENTITY author    "ninthwalker">
+<!ENTITY version   "13JUN2016">
+<!ENTITY pluginURL "https://raw.githubusercontent.com/ninthwalker/docker-plugins/master/plexreport/&name;.plg">
+<!ENTITY source    "/boot/config/plugins/&name;/&name;">
+<!ENTITY MD5       "5a197d2db4bc4514bd1f7d0dfb048f1b">
+]>
+
+<PLUGIN name="&name;" author="&author;" version="&version;" pluginURL="&pluginURL;">
+
+<CHANGES>
+##&name;
+
+###&version;
+- Initial plexReport Scheduler companion plugin
+</CHANGES>
+
+<!-- PRE-INSTALL SCRIPT -->
+<FILE Run="/bin/bash">
+<INLINE>
+# Check unRAID version
+source /etc/unraid-version
+if [[ ${version:0:3} == 6.0 ]]; then
+  echo "unRAID version 6.1 or higher is required"
+  exit 1
+fi
+
+# Remove old 'source' packages
+MD5=$(md5sum &source;.txz 2>/dev/null|grep -Po '^\S+')
+if [[ $MD5 != &MD5; ]]; then
+  rm -f &source;*.txz
+fi
+</INLINE>
+</FILE>
+
+<!-- SOURCE PACKAGE -->
+<FILE Name="&source;.txz" Run="upgradepkg --install-new --reinstall">
+<URL>https://raw.githubusercontent.com/ninthwalker/docker-plugins/master/plexreport/&name;.txz</URL>
+<MD5>&MD5;</MD5>
+</FILE>
+
+<!-- POST-INSTALL SCRIPT -->
+<FILE Run="/bin/bash">
+<INLINE>
+# Update file access mode
+chmod 644 $(awk '/\.(htm|php|js|page|css|png|plg|gif|cfg|md)$/{print "/"$0}' /var/log/packages/&name;)
+
+echo ""
+echo "-----------------------------------------------------------"
+echo " Plugin &name; is installed."
+echo " Find the plexReport Scheduler tab under unRAID > Settings > Scheduler"
+echo " This plugin requires Dynamix webGui to operate"
+echo " Based off Bergware International original Dynamix scheduler script"
+echo " Version: &version;"
+echo "-----------------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+<!-- REMOVE SCRIPT -->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+# Remove plugin related files
+rm -rf /boot/config/plugins/&name;
+
+# Uninstall the 'source' package
+removepkg &name;
+
+# Remove cron entry
+rm -f /boot/config/plugins/plexreport/plexreport_schedule.cron
+/usr/local/sbin/update_cron
+</INLINE>
+</FILE>
+
+</PLUGIN>
