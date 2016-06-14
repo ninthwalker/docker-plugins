@@ -9,7 +9,7 @@
 <!ENTITY version   "13JUN2016">
 <!ENTITY pluginURL "https://raw.githubusercontent.com/ninthwalker/docker-plugins/master/plexreport/&name;.plg">
 <!ENTITY source    "/boot/config/plugins/&name;/&name;">
-<!ENTITY MD5       "0a24ef72e31eb0d6024421a93982886b">
+<!ENTITY MD5       "37585d20468f59f2b9d7b5257b545454">
 ]>
 
 <PLUGIN name="&name;" author="&author;" version="&version;" pluginURL="&pluginURL;">
@@ -73,7 +73,7 @@ rm -rf /boot/config/plugins/&name;
 removepkg &name;
 
 # Remove cron entry
-rm -f /boot/config/plugins/plexreport/plexreport_schedule.cron
+rm -f /boot/config/plugins/plexreport.scheduler/plexreport-schedule.cron
 /usr/local/sbin/update_cron
 </INLINE>
 </FILE>
