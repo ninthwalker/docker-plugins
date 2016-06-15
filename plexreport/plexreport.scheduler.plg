@@ -9,7 +9,7 @@
 <!ENTITY version   "13JUN2016">
 <!ENTITY pluginURL "https://raw.githubusercontent.com/ninthwalker/docker-plugins/master/plexreport/&name;.plg">
 <!ENTITY source    "/boot/config/plugins/&name;/&name;">
-<!ENTITY MD5       "d6588212c881d60a0e4d12a695c19e70">
+<!ENTITY MD5       "ac03eab8a92898db9f81bf3a315e3765">
 ]>
 
 <PLUGIN name="&name;" author="&author;" version="&version;" pluginURL="&pluginURL;">
