@@ -5,11 +5,11 @@
 
 <!DOCTYPE PLUGIN [
 <!ENTITY name      "plexreport.scheduler">
-<!ENTITY author    "ninthwalker">
+<!ENTITY author    "Ninthwalker">
 <!ENTITY version   "2016.06.15">
 <!ENTITY pluginURL "https://raw.githubusercontent.com/ninthwalker/docker-plugins/master/plexreport/&name;.plg">
 <!ENTITY source    "/boot/config/plugins/&name;/&name;">
-<!ENTITY MD5       "dfb16f987ff18ab4cd9ab9a98dbe8e7e">
+<!ENTITY MD5       "bac4658b331a39f09143720ccc47d75c">
 ]>
 
 <PLUGIN name="&name;" author="&author;" version="&version;" pluginURL="&pluginURL;">
